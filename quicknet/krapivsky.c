@@ -105,6 +105,16 @@ void simulate_krapivsky_model(directed_model_t *krapivsky_model) {
       out_degree_sampled_node = heap_sample_increment(krapivsky_model->out_degree_heap,
                                                       krapivsky_model->compute_increased_mass_out);
 
+      if (in_degree_sampled_node == out_degree_sampled_node) {
+        // no self referencing
+        continue;
+      }
+
+      if (is_in_adjacency_list(out_degree_sampled_node, in_degree_sampled_node)) {
+        // in_degree_sampled_node already in adjacency list of out_degree_sampled_node
+        continue;
+      }
+
       // add an edge between the sampled nodes
       add_directed_edge(out_degree_sampled_node, in_degree_sampled_node);
     }

@@ -59,6 +59,17 @@ void add_directed_edge(directed_node_t *n_from, directed_node_t *n_to) {
   n_to->in_degree++;
 }
 
+int is_in_adjacency_list(directed_node_t *n_from, directed_node_t *n_to) {
+  directed_node_list_t *node_list = n_from->adjacency_list;
+  while(node_list != NULL) {
+    if (node_list->node == n_to) {
+      return 1;
+    }
+    node_list = node_list->next;
+  }
+  return 0;
+}
+
 void directed_node_free(directed_node_t *node, char free_adjacency_list) {
   if(free_adjacency_list && node->adjacency_list != NULL)
     directed_node_list_free(node->adjacency_list);
