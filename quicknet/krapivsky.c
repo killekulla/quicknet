@@ -72,8 +72,12 @@ void simulate_krapivsky_model(directed_model_t *krapivsky_model) {
   // while the network still needs to grow...
   while(krapivsky_model->n_nodes < krapivsky_model->target_n_nodes) {
     u = rand() / (double) RAND_MAX;
+
+    double current_p = krapivsky_model->n_nodes / (double)krapivsky_model->n_edges;
+    double p_factor = current_p / krapivsky_model->p;
+
     // with probability p, take a node step
-    if (u < krapivsky_model->p) {
+    if (u < krapivsky_model->p / p_factor) {
       // sample an existing node by in-degree and increase its preference mass
       in_degree_sampled_node = heap_sample_increment(krapivsky_model->in_degree_heap,
                                                      krapivsky_model->compute_increased_mass_in);
