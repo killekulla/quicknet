@@ -7,6 +7,7 @@ struct directed_model {
   heap_t *in_degree_heap;
   heap_t *out_degree_heap;
   uint64_t n_nodes;
+  uint64_t n_edges;
   uint64_t target_n_nodes;
   double p;
   double lambda;

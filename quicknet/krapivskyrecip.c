@@ -92,6 +92,7 @@ void simulate_reciprocated_krapivsky_model(directed_model_t *krapivsky_model, do
 
       // add an edge from new node to the existing node
       add_directed_edge(new_node, in_degree_sampled_node);
+      krapivsky_model->n_edges++;
 
       // index the new node
       heap_insert(krapivsky_model->in_degree_heap,
@@ -104,6 +105,7 @@ void simulate_reciprocated_krapivsky_model(directed_model_t *krapivsky_model, do
       u = rand() / (double) RAND_MAX;
       if(u < r) {
         add_directed_edge(in_degree_sampled_node, new_node);
+        krapivsky_model->n_edges++;
         //update indices
         heap_increase_mass(krapivsky_model->out_degree_heap,
                            hash_get(krapivsky_model->out_degree_heap->hash,in_degree_sampled_node)->item,
@@ -125,11 +127,13 @@ void simulate_reciprocated_krapivsky_model(directed_model_t *krapivsky_model, do
 
       // add an edge between the sampled nodes
       add_directed_edge(out_degree_sampled_node, in_degree_sampled_node);
+      krapivsky_model->n_edges++;
 
       // with probability r, reciprocate the edge
       u = rand() / (double) RAND_MAX;
       if(u < r) {
         add_directed_edge(in_degree_sampled_node, out_degree_sampled_node);
+        krapivsky_model->n_edges++;
         //update indices
         heap_increase_mass(krapivsky_model->out_degree_heap,
                            hash_get(krapivsky_model->out_degree_heap->hash,in_degree_sampled_node)->item,

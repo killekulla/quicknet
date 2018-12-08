@@ -24,6 +24,7 @@ directed_model_t *make_directed_model(double p,
   dm->in_degree_heap = make_heap();
   dm->out_degree_heap = make_heap();
   dm->n_nodes = 0;
+  dm->n_edges = 0;
   dm->target_n_nodes = target_n_nodes;
   dm->p = p;
   dm->lambda = lambda;
@@ -56,6 +57,7 @@ void reset_model(directed_model_t *dm) {
   }
 
   dm->n_nodes = 0;
+  dm->n_edges = 0;
   directed_seed(dm);
 }
 
@@ -81,6 +83,8 @@ void directed_seed(directed_model_t *dm) {
   add_directed_edge(node0, node1);
   add_directed_edge(node0, node2);
   add_directed_edge(node1, node2);
+
+  dm->n_edges = 3;
 
   heap_insert(dm->in_degree_heap, node0, dm->compute_preference_mass_in);
   heap_insert(dm->in_degree_heap, node1, dm->compute_preference_mass_in);

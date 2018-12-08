@@ -87,6 +87,7 @@ void simulate_krapivsky_model(directed_model_t *krapivsky_model) {
 
       // add an edge from new node to the existing node
       add_directed_edge(new_node, in_degree_sampled_node);
+      krapivsky_model->n_edges++;
 
       // index the new node
       heap_insert(krapivsky_model->in_degree_heap,
@@ -117,6 +118,7 @@ void simulate_krapivsky_model(directed_model_t *krapivsky_model) {
 
       // add an edge between the sampled nodes
       add_directed_edge(out_degree_sampled_node, in_degree_sampled_node);
+      krapivsky_model->n_edges++;
     }
   }
 }

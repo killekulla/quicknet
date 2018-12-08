@@ -87,6 +87,7 @@ void simulate_reciprocated_price_model(directed_model_t *price_model, double r) 
     u = rand() / (double) RAND_MAX;
     if (u < r) {
       add_directed_edge(sampled_node, new_node);
+      price_model->n_edges++;
     }
 
     // index the new node

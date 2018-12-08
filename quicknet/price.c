@@ -82,6 +82,7 @@ void simulate_price_model(directed_model_t *price_model) {
 
     // add an edge from new node to the existing node
     add_directed_edge(new_node, sampled_node);
+    price_model->n_edges++;
 
     // index the new node
     heap_insert(price_model->in_degree_heap,
